@@ -1,0 +1,13 @@
+[Unit]
+Description=web3chan
+Wants=network-online.target
+After=network-online.target postgresql.service
+
+[Service]
+SyslogIdentifier=web3chan
+ExecStart=/usr/bin/podman run --env-file /root/config/web3chan.env -p 127.0.0.1:18166:18166/tcp -it web3chan
+Restart=always
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target
